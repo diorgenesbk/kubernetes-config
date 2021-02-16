@@ -6,6 +6,13 @@ Buildar o dockerfile
 Push na imagem docker
  - docker push diorgenesbk/hello-go:1
 
+Gerar o SVC
+ - kubectl apply -f .\k8s\service.yaml
+
+Liberar uma determinada porta do SVC externamente
+ - kubectl port-forward svc/goserver-service 8000:8080 
+ - portas externa:interna
+
 Gerar o pod
  - kubectl apply -f .\k8s\pod.yaml
 
