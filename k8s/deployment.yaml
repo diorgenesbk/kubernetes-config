@@ -16,11 +16,8 @@ spec:
     spec:
       containers:
         - name: "goserver"
-          image: "diorgenesbk/hello-go:4"
-          env:
-            - name: NAME
-              value: "Didico"
-            - name: AGE
-              value: "28"
-
+          image: "diorgenesbk/hello-go:7"
+          envFrom:
+            - secretRef:
+                name: goserver-secret
     
