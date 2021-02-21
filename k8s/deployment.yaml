@@ -8,7 +8,7 @@ spec:
   selector: 
     matchLabels:
       app: "goserver"
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,15 +16,25 @@ spec:
     spec:
       containers:
         - name: "goserver"
-          image: "diorgenesbk/hello-go:9"
+          image: "diorgenesbk/hello-go:11.1"
+
+          resources:
+            requests:
+              cpu: "0.05"
+              memory: 20Mi
+            limits:
+              cpu: "0.05"
+              memory: 50Mi
+
           livenessProbe:
             httpGet:
               path: /healthz
               port: 80
             periodSeconds: 5
             failureThreshold: 3
-            timeoutSeconds: 1
+            timeoutSeconds: 60
             successThreshold: 1
+
           readinessProbe:
             httpGet:
               path: /healthz
@@ -32,6 +42,7 @@ spec:
             periodSeconds: 5
             failureThreshold: 3
             initialDelaySeconds: 10
+
           envFrom:
             - secretRef:
                 name: goserver-secret

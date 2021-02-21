@@ -30,3 +30,7 @@ Ver status dos pods
 
 Ver o detalhamento de um determinado pod
  - kubectl describe pod goserver-hqdr7
+
+
+Rodar teste de stress com Fortio
+ - kubectl run -it --generator=run-pod/v1 fortio --rm --image=fortio/fortio -- load -qps 800 -t 120s -c 70 "http://goserver-service/healthz"
