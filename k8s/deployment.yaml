@@ -16,7 +16,22 @@ spec:
     spec:
       containers:
         - name: "goserver"
-          image: "diorgenesbk/hello-go:7"
+          image: "diorgenesbk/hello-go:9"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 3
+            timeoutSeconds: 1
+            successThreshold: 1
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 3
+            initialDelaySeconds: 10
           envFrom:
             - secretRef:
                 name: goserver-secret
